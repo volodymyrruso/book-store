@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: your_name
+      changes:
+        - sqlFile:
+            path: db/changelog/changeset_create_table/create_book_table.sql
+  - changeSet:
+      id: 2
+      author: Volodymyr
+      changes:
+        - sqlFile:
+            path: db/changelog/changeset_insert_data/insert_data_into_books_table.sql
