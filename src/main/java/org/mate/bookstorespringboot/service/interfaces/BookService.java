@@ -1,22 +1,32 @@
 package org.mate.bookstorespringboot.service.interfaces;
 
 import java.util.List;
-import org.mate.bookstorespringboot.model.Book;
+import org.mate.bookstorespringboot.controller.dto.BookDto;
+import org.mate.bookstorespringboot.controller.dto.BookRequestDto;
 
 public interface BookService {
 
     /**
      * Save a book.
      *
-     * @param  book  the book to be saved
+     * @param  bookRequestDto  the book to be saved
      * @return       the saved book
      */
-    Book save(Book book);
+    BookDto save(BookRequestDto bookRequestDto);
 
     /**
      * Find all books.
      *
      * @return         list of all books
      */
-    List<Book> findAll();
+    List<BookDto> findAll();
+
+    /**
+     * Find book by id.
+     *
+     * @param  id  id of the book
+     * @return     the book with the given id
+     */
+    BookDto findById(Long id);
 }
+
