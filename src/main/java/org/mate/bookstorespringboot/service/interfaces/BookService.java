@@ -28,5 +28,16 @@ public interface BookService {
      * @return     the book with the given id
      */
     BookDto findById(Long id);
+
+    /**
+     * @param id id of the book
+     * @return returns updated book
+     */
+    BookDto updateBook(Long id, BookRequestDto bookRequestDto);
+
+    /**
+     * @param id id of the book to be deleted
+     */
+    void deleteById(Long id);
 }
 

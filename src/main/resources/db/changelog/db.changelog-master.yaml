@@ -11,3 +11,9 @@ databaseChangeLog:
       changes:
         - sqlFile:
             path: db/changelog/changeset_insert_data/insert_data_into_books_table.sql
+  - changeSet:
+      id: 3
+      author: Volodymyr
+      changes:
+        - sqlFile:
+            path: db/changelog/changeset_update_table/add_isDeleted_to_books_table.sql
