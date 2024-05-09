@@ -11,7 +11,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Setter;
 
 @Entity
@@ -27,20 +26,16 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NonNull
-    @Column(name = "title")
+    @Column(name = "title",nullable = false)
     private String title;
 
-    @NonNull
-    @Column(name = "author")
+    @Column(name = "author", nullable = false)
     private String author;
 
-    @NonNull
-    @Column(unique = true)
+    @Column(name = "isbn", unique = true, nullable = false)
     private String isbn;
 
-    @NonNull
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     private BigDecimal price;
 
     @Column(name = "description")
