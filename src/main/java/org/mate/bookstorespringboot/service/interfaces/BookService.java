@@ -10,5 +10,5 @@ public interface BookService {
 
     List<BookDto> findAll();
 
-    BookDto findById(Long id);
+    BookDto findById(Long id); 
 }
