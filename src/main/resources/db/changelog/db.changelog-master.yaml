@@ -16,4 +16,4 @@ databaseChangeLog:
       author: Volodymyr
       changes:
         - sqlFile:
-            path: db/changelog/changeset_update_table/add_isDeleted_to_books_table.sql
+            path: db/changelog/changeset_update_table/add_is_deleted_to_books_table.sql
