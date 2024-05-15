@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.mate.bookstorespringboot.controller.dto.BookDto;
 import org.mate.bookstorespringboot.controller.dto.BookRequestDto;
 import org.mate.bookstorespringboot.service.interfaces.BookService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,8 +26,8 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping
-    public ResponseEntity<List<BookDto>> getBooks() {
-        return ResponseEntity.ok(bookService.findAll());
+    public ResponseEntity<List<BookDto>> getBooks(Pageable pageable) {
+        return ResponseEntity.ok(bookService.findAll(pageable));
     }
 
     @GetMapping("/{id}")
@@ -41,9 +42,9 @@ public class BookController {
     }
 
     @PutMapping("{id}")
-    public BookDto updateBook(@PathVariable Long id,
+    public ResponseEntity<BookDto> updateBook(@PathVariable Long id,
                               @RequestBody @Valid BookRequestDto bookRequestDto) {
-        return bookService.updateBook(id, bookRequestDto);
+        return ResponseEntity.ok(bookService.updateBook(id, bookRequestDto));
     }
 
     @DeleteMapping("{id}")
