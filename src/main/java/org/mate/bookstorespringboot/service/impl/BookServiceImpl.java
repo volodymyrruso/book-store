@@ -15,13 +15,14 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
 
+    private static final String BOOK_NOT_FOUND = "Book not found with id: ";
+
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
 
     @Override
     public BookDto save(BookRequestDto bookRequestDto) {
-        Book book = bookMapper.toEntity(bookRequestDto);
-        return bookMapper.toDto(bookRepository.save(book));
+        return bookMapper.toDto(bookRepository.save(bookMapper.toEntity(bookRequestDto)));
     }
 
     @Override
@@ -33,8 +34,29 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookDto findById(Long id) {
-        Book book = bookRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Book not found with id: " + id));
-        return bookMapper.toDto(book);
+        return bookRepository.findById(id)
+                .map(bookMapper::toDto)
+                .orElseThrow(() -> new EntityNotFoundException(BOOK_NOT_FOUND + id));
+    }
+
+    @Override
+    public BookDto updateBook(Long id, BookRequestDto bookRequestDto) {
+        Book existingBook = bookRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(BOOK_NOT_FOUND + id));
+
+        Book updatedBook = bookMapper.toEntityWithId(bookRequestDto, existingBook.getId());
+        return bookMapper.toDto(bookRepository.save(updatedBook));
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        checkIfBookExists(id);
+        bookRepository.deleteById(id);
+    }
+
+    private void checkIfBookExists(Long id) {
+        if (!bookRepository.existsById(id)) {
+            throw new EntityNotFoundException(BOOK_NOT_FOUND + id);
+        }
     }
 }
