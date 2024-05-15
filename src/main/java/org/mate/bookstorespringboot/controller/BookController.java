@@ -1,5 +1,6 @@
 package org.mate.bookstorespringboot.controller;
 
+import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.mate.bookstorespringboot.controller.dto.BookDto;
