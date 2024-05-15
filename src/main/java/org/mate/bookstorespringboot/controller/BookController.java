@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.mate.bookstorespringboot.controller.dto.BookDto;
 import org.mate.bookstorespringboot.controller.dto.BookRequestDto;
 import org.mate.bookstorespringboot.service.interfaces.BookService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,18 +24,19 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping
-    public List<BookDto> getBooks() {
-        return bookService.findAll();
+    public ResponseEntity<List<BookDto>> getBooks() {
+        return ResponseEntity.ok(bookService.findAll());
     }
 
     @GetMapping("/{id}")
-    public BookDto getBookById(@PathVariable Long id) {
-        return bookService.findById(id);
+    public ResponseEntity<BookDto> getBookById(@PathVariable Long id) {
+        return ResponseEntity.ok(bookService.findById(id));
     }
 
     @PostMapping
-    public BookDto createBook(@RequestBody BookRequestDto bookRequestDto) {
-        return bookService.save(bookRequestDto);
+    public ResponseEntity<BookDto> createBook(@RequestBody BookRequestDto bookRequestDto) {
+        BookDto savedBook = bookService.save(bookRequestDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);
     }
 
     @PutMapping("{id}")
