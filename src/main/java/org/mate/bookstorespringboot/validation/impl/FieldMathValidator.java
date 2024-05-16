@@ -25,7 +25,8 @@ public class FieldMathValidator implements ConstraintValidator<FieldMatch, Objec
 
             return Objects.equals(firstObj, secondObj);
         } catch (ReflectiveOperationException e) {
-            throw new RuntimeException("Annotation does not work well. Check annotations properties.", e);
+            throw new RuntimeException("Annotation does not work well."
+                    + " Check annotations properties.", e);
         }
     }
 
