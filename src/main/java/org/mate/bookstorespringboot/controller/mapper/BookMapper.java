@@ -7,7 +7,7 @@ import org.mate.bookstorespringboot.controller.dto.BookDto;
 import org.mate.bookstorespringboot.controller.dto.BookRequestDto;
 import org.mate.bookstorespringboot.model.Book;
 
-@Mapper(config = MapperConfig.class)
+@Mapper(componentModel = "spring",config = MapperConfig.class)
 public interface BookMapper {
 
     BookDto toDto(Book book);
