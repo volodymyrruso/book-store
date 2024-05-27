@@ -12,7 +12,4 @@ public record UserRequestDto(@ValidEmail String email,
                              @NotBlank String firstName,
                              @NotBlank String lastName,
                              String shippingAddress) {
-
 }
-
-

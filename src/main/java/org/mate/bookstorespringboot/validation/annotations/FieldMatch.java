@@ -12,8 +12,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 import org.mate.bookstorespringboot.validation.impl.FieldMathValidator;
 
-
-
 @Documented
 @Constraint(validatedBy = FieldMathValidator.class)
 @Target({ TYPE, FIELD, ANNOTATION_TYPE })

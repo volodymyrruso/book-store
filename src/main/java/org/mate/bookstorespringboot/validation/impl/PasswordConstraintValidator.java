@@ -9,8 +9,6 @@ public class PasswordConstraintValidator implements ConstraintValidator<ValidPas
 
     private static final int MIN_LENGTH = 6;
     private static final int MAX_LENGTH = 20;
-
-    private static final int GROUP_MIN_COUNT = 4;
     private static final Pattern AT_LEAST_ONE_DIGIT = Pattern.compile(".*\\d.*");
     private static final Pattern AT_LEAST_ONE_UPPERCASE_LETTER = Pattern.compile(".*[A-Z].*");
     private static final Pattern AT_LEAST_ONE_LOWERCASE_LETTER = Pattern.compile(".*[a-z].*");
@@ -28,30 +26,13 @@ public class PasswordConstraintValidator implements ConstraintValidator<ValidPas
 
     @Override
     public boolean isValid(String password, ConstraintValidatorContext context) {
-        if (password == null) {
-            return false;
-        }
-
-        if (!PASSWORD_PATTERN.matcher(password).matches()) {
-            return false;
-        }
-
-        int count = 0;
-
-        if (MIN_LENGTH <= password.length() && password.length() <= MAX_LENGTH) {
-            if (AT_LEAST_ONE_DIGIT.matcher(password).matches()) {
-                count++;
-            }
-            if (AT_LEAST_ONE_LOWERCASE_LETTER.matcher(password).matches()) {
-                count++;
-            }
-            if (AT_LEAST_ONE_UPPERCASE_LETTER.matcher(password).matches()) {
-                count++;
-            }
-            if (AT_LEAST_ONE_SPECIAL_CHAR.matcher(password).matches()) {
-                count++;
-            }
-        }
-        return count >= GROUP_MIN_COUNT;
+        return password != null
+                && password.length() >= MIN_LENGTH
+                && password.length() <= MAX_LENGTH
+                && PASSWORD_PATTERN.matcher(password).matches()
+                && AT_LEAST_ONE_DIGIT.matcher(password).matches()
+                && AT_LEAST_ONE_UPPERCASE_LETTER.matcher(password).matches()
+                && AT_LEAST_ONE_LOWERCASE_LETTER.matcher(password).matches()
+                && AT_LEAST_ONE_SPECIAL_CHAR.matcher(password).matches();
     }
 }

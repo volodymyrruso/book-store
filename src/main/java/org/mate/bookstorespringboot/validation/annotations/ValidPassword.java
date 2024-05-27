@@ -13,7 +13,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 import org.mate.bookstorespringboot.validation.impl.PasswordConstraintValidator;
 
-
 @NotBlank
 @Documented
 @Constraint(validatedBy = PasswordConstraintValidator.class)
@@ -27,4 +26,3 @@ public @interface ValidPassword {
 
     Class<? extends Payload>[] payload() default {};
 }
-
