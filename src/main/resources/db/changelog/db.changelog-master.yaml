@@ -23,3 +23,21 @@ databaseChangeLog:
       changes:
         - sqlFile:
             path: db/changelog/changeset_create_table/create_user_table.sql
+  - changeSet:
+      id: 5
+      author: Volodymyr
+      changes:
+        - sqlFile:
+            path: db/changelog/changeset_create_table/create_role_table.sql
+  - changeSet:
+      id: 6
+      author: Volodymyr
+      changes:
+        - sqlFile:
+            path: db/changelog/changeset_insert_data/insert_roles_to_roles_table.sql
+  - changeSet:
+      id: 7
+      author: Volodymyr
+      changes:
+        - sqlFile:
+            path: db/changelog/changeset_create_table/create_user_roles_table.sql

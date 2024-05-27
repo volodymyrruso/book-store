@@ -1,7 +1,7 @@
 package org.mate.bookstorespringboot.controller.dto;
 
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import org.mate.bookstorespringboot.validation.annotations.FieldMatch;
 import org.mate.bookstorespringboot.validation.annotations.ValidEmail;
 import org.mate.bookstorespringboot.validation.annotations.ValidPassword;
@@ -10,7 +10,7 @@ import org.mate.bookstorespringboot.validation.annotations.ValidPassword;
 public record UserRequestDto(@ValidEmail String email,
                              @ValidPassword String password,
                              @NotBlank String repeatPassword,
-                             @NotBlank @Max(50) String firstName,
-                             @NotBlank @Max(50) String lastName,
+                             @NotBlank @Size(max = 50) String firstName,
+                             @NotBlank @Size(max = 50) String lastName,
                              String shippingAddress) {
 }
