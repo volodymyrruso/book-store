@@ -26,8 +26,8 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping
-    public ResponseEntity<List<BookDto>> getBooks(Pageable pageable) {
-        return ResponseEntity.ok(bookService.findAll(pageable));
+    public List<BookDto> getBooks(Pageable pageable) {
+        return bookService.findAll(pageable);
     }
 
     @GetMapping("/{id}")
@@ -42,9 +42,9 @@ public class BookController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<BookDto> updateBook(@PathVariable Long id,
+    public BookDto updateBook(@PathVariable Long id,
                               @RequestBody @Valid BookRequestDto bookRequestDto) {
-        return ResponseEntity.ok(bookService.updateBook(id, bookRequestDto));
+        return bookService.updateBook(id, bookRequestDto);
     }
 
     @DeleteMapping("{id}")
