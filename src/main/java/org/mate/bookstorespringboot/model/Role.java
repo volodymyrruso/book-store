@@ -13,7 +13,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.mate.bookstorespringboot.model.enums.RoleName;
 import org.springframework.security.core.GrantedAuthority;
 
 @Entity
@@ -37,5 +36,10 @@ public class Role implements GrantedAuthority {
     @Override
     public String getAuthority() {
         return roleName.name();
+    }
+
+    public enum RoleName {
+        ROLE_ADMIN,
+        ROLE_USER
     }
 }

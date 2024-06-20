@@ -1,0 +1,5 @@
+ALTER TABLE roles MODIFY COLUMN role ENUM('ADMIN', 'USER', 'ROLE_ADMIN', 'ROLE_USER');
+
+
+UPDATE roles SET role = 'ROLE_ADMIN' WHERE id = 2;
+UPDATE roles SET role = 'ROLE_USER' WHERE id = 1;
