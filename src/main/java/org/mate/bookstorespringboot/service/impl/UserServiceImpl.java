@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
-import org.mate.bookstorespringboot.controller.dto.UserRequestDto;
-import org.mate.bookstorespringboot.controller.dto.UserResponseDto;
+import org.mate.bookstorespringboot.controller.dto.auth.UserRegistrationRequestDto;
+import org.mate.bookstorespringboot.controller.dto.auth.UserRegistrationResponseDto;
 import org.mate.bookstorespringboot.controller.mapper.UserMapper;
 import org.mate.bookstorespringboot.exceptions.RegistrationException;
 import org.mate.bookstorespringboot.model.Role;
@@ -29,12 +29,15 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
 
     @Override
-    public UserResponseDto createUser(UserRequestDto userRequestDto) {
-        Optional<User> optionalUser = userRepository.findByEmail(userRequestDto.email());
+    public UserRegistrationResponseDto createUser(UserRegistrationRequestDto
+                                                              userRegistrationRequestDto) {
+        Optional<User> optionalUser = userRepository
+                .findByEmail(userRegistrationRequestDto.email());
         if (optionalUser.isPresent()) {
             throw new RegistrationException(USER_ALREADY_EXISTS
                     .formatted(optionalUser.get().getEmail()));
         }
+
         Role userRole = roleRepository
                 .findByRoleName(Role.RoleName.ROLE_USER)
                 .orElseThrow(() -> new RegistrationException(CANT_FIND_ROLE_BY_NAME
@@ -42,8 +45,8 @@ public class UserServiceImpl implements UserService {
         Set<Role> defaultUserRoleSet = new HashSet<>();
         defaultUserRoleSet.add(userRole);
 
-        User user = userMapper.toEntity(userRequestDto);
-        user.setPassword(passwordEncoder.encode(userRequestDto.password()));
+        User user = userMapper.toEntity(userRegistrationRequestDto);
+        user.setPassword(passwordEncoder.encode(userRegistrationRequestDto.password()));
         user.setRole(defaultUserRoleSet);
         return userMapper.toDto(userRepository.save(user));
     }
