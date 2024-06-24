@@ -14,5 +14,10 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
           cache: maven
+      - name: Set up environment variables
+        run: |
+          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> $GITHUB_ENV
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> $GITHUB_ENV
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots verify
