@@ -21,7 +21,6 @@ import org.springframework.security.core.GrantedAuthority;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class Role implements GrantedAuthority {
 
     @Id
