@@ -2,13 +2,14 @@ package org.mate.bookstorespringboot.service.impl;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.mate.bookstorespringboot.controller.dto.BookDto;
-import org.mate.bookstorespringboot.controller.dto.BookRequestDto;
+import org.mate.bookstorespringboot.controller.dto.book.BookDto;
+import org.mate.bookstorespringboot.controller.dto.book.BookRequestDto;
 import org.mate.bookstorespringboot.controller.mapper.BookMapper;
 import org.mate.bookstorespringboot.exceptions.EntityNotFoundException;
 import org.mate.bookstorespringboot.model.Book;
 import org.mate.bookstorespringboot.repository.BookRepository;
 import org.mate.bookstorespringboot.service.interfaces.BookService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,8 +27,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDto> findAll() {
-        return bookRepository.findAll().stream()
+    public List<BookDto> findAll(Pageable pageable) {
+        return bookRepository.findAll(pageable).stream()
                 .map(bookMapper::toDto)
                 .toList();
     }

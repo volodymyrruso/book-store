@@ -1,25 +1,19 @@
 package org.mate.bookstorespringboot.service.interfaces;
 
 import java.util.List;
-import org.mate.bookstorespringboot.controller.dto.BookDto;
-import org.mate.bookstorespringboot.controller.dto.BookRequestDto;
+import org.mate.bookstorespringboot.controller.dto.book.BookDto;
+import org.mate.bookstorespringboot.controller.dto.book.BookRequestDto;
+import org.springframework.data.domain.Pageable;
 
 public interface BookService {
 
     BookDto save(BookRequestDto bookRequestDto);
 
-    List<BookDto> findAll();
+    List<BookDto> findAll(Pageable pageable);
 
     BookDto findById(Long id);
 
-    /**
-     * @param id id of the book
-     * @return returns updated book
-     */
     BookDto updateBook(Long id, BookRequestDto bookRequestDto);
 
-    /**
-     * @param id id of the book to be deleted
-     */
     void deleteById(Long id);
 }
