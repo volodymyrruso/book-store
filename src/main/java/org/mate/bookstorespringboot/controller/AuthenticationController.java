@@ -2,9 +2,12 @@ package org.mate.bookstorespringboot.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.mate.bookstorespringboot.controller.dto.UserRequestDto;
-import org.mate.bookstorespringboot.controller.dto.UserResponseDto;
+import org.mate.bookstorespringboot.controller.dto.auth.UserLoginRequestDto;
+import org.mate.bookstorespringboot.controller.dto.auth.UserLoginResponseDto;
+import org.mate.bookstorespringboot.controller.dto.auth.UserRegistrationRequestDto;
+import org.mate.bookstorespringboot.controller.dto.auth.UserRegistrationResponseDto;
 import org.mate.bookstorespringboot.exceptions.RegistrationException;
+import org.mate.bookstorespringboot.security.AuthenticationService;
 import org.mate.bookstorespringboot.service.interfaces.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +22,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
 
     private final UserService userService;
+    private final AuthenticationService authenticationService;
 
     @PostMapping("/registration")
-    public ResponseEntity<UserResponseDto> register(
-            @RequestBody @Valid UserRequestDto userRequestDto)
+    public ResponseEntity<UserRegistrationResponseDto> register(
+            @RequestBody @Valid UserRegistrationRequestDto userRegistrationRequestDto)
             throws RegistrationException {
-        UserResponseDto user = userService.createUser(userRequestDto);
+        UserRegistrationResponseDto user = userService.createUser(userRegistrationRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    }
+
+    @PostMapping("/login")
+    public UserLoginResponseDto login(
+            @RequestBody @Valid UserLoginRequestDto requestDto) {
+        return authenticationService.authenticate(requestDto);
     }
 }

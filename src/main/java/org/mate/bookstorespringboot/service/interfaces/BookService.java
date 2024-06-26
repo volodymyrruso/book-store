@@ -1,8 +1,8 @@
 package org.mate.bookstorespringboot.service.interfaces;
 
 import java.util.List;
-import org.mate.bookstorespringboot.controller.dto.BookDto;
-import org.mate.bookstorespringboot.controller.dto.BookRequestDto;
+import org.mate.bookstorespringboot.controller.dto.book.BookDto;
+import org.mate.bookstorespringboot.controller.dto.book.BookRequestDto;
 import org.springframework.data.domain.Pageable;
 
 public interface BookService {

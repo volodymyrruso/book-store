@@ -2,8 +2,8 @@ package org.mate.bookstorespringboot.service.impl;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.mate.bookstorespringboot.controller.dto.BookDto;
-import org.mate.bookstorespringboot.controller.dto.BookRequestDto;
+import org.mate.bookstorespringboot.controller.dto.book.BookDto;
+import org.mate.bookstorespringboot.controller.dto.book.BookRequestDto;
 import org.mate.bookstorespringboot.controller.mapper.BookMapper;
 import org.mate.bookstorespringboot.exceptions.EntityNotFoundException;
 import org.mate.bookstorespringboot.model.Book;
