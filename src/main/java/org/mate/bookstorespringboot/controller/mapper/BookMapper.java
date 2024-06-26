@@ -3,8 +3,8 @@ package org.mate.bookstorespringboot.controller.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mate.bookstorespringboot.configuration.MapperConfig;
-import org.mate.bookstorespringboot.controller.dto.BookDto;
-import org.mate.bookstorespringboot.controller.dto.BookRequestDto;
+import org.mate.bookstorespringboot.controller.dto.book.BookDto;
+import org.mate.bookstorespringboot.controller.dto.book.BookRequestDto;
 import org.mate.bookstorespringboot.model.Book;
 
 @Mapper(componentModel = "spring",config = MapperConfig.class)

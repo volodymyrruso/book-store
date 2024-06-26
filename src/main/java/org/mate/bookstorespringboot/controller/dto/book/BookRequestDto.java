@@ -1,4 +1,4 @@
-package org.mate.bookstorespringboot.controller.dto;
+package org.mate.bookstorespringboot.controller.dto.book;
 
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
