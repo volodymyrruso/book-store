@@ -3,11 +3,13 @@ package org.mate.bookstorespringboot.service.impl;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.mate.bookstorespringboot.controller.dto.book.BookDto;
+import org.mate.bookstorespringboot.controller.dto.book.BookDtoWithoutCategoryIds;
 import org.mate.bookstorespringboot.controller.dto.book.BookRequestDto;
 import org.mate.bookstorespringboot.controller.mapper.BookMapper;
 import org.mate.bookstorespringboot.exceptions.EntityNotFoundException;
 import org.mate.bookstorespringboot.model.Book;
 import org.mate.bookstorespringboot.repository.BookRepository;
+import org.mate.bookstorespringboot.repository.CategoryRepository;
 import org.mate.bookstorespringboot.service.interfaces.BookService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -17,9 +19,11 @@ import org.springframework.stereotype.Service;
 public class BookServiceImpl implements BookService {
 
     private static final String BOOK_NOT_FOUND = "Book not found with id: ";
+    private static final String CATEGORY_NOT_FOUND = "Category not found with id: ";
 
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
+    private final CategoryRepository categoryRepository;
 
     @Override
     public BookDto save(BookRequestDto bookRequestDto) {
@@ -53,6 +57,13 @@ public class BookServiceImpl implements BookService {
     public void deleteById(Long id) {
         checkIfBookExists(id);
         bookRepository.deleteById(id);
+    }
+
+    @Override
+    public List<BookDtoWithoutCategoryIds> findAllByCategoryId(Long id, Pageable pageable) {
+        return bookRepository.findAllByCategoriesId(id, pageable).stream()
+                .map(bookMapper::toDtoWithoutCategoryIds)
+                .toList();
     }
 
     private void checkIfBookExists(Long id) {

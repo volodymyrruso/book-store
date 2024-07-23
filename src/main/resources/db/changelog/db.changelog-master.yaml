@@ -61,3 +61,21 @@ databaseChangeLog:
       changes:
         - sqlFile:
             path: db/changelog/changeset_insert_data/insert_admin_to_users_roles_table.sql
+  - changeSet:
+      id: 11
+      author: Volodymyr
+      changes:
+        - sqlFile:
+            path: db/changelog/changeset_create_table/create_category_table.sql
+  - changeSet:
+      id: 12
+      author: Volodymyr
+      changes:
+        - sqlFile:
+            path: db/changelog/changeset_create_table/create_book_categories_join_table.sql
+  - changeSet:
+      id: 13
+      author: Volodymyr
+      changes:
+        - sqlFile:
+            path: db/changelog/changeset_update_table/add_name_field_and_isDeleted_to_category_table.sql
