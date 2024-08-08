@@ -11,6 +11,8 @@ import org.mate.bookstorespringboot.model.Book;
 import org.mate.bookstorespringboot.repository.BookRepository;
 import org.mate.bookstorespringboot.repository.CategoryRepository;
 import org.mate.bookstorespringboot.service.interfaces.BookService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -31,10 +33,12 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDto> findAll(Pageable pageable) {
-        return bookRepository.findAll(pageable).stream()
+    public Page<BookDto> findAll(Pageable pageable) {
+        List<BookDto> list = bookRepository.findAll(pageable).stream()
                 .map(bookMapper::toDto)
                 .toList();
+        Page<BookDto> page = new PageImpl<>(list);
+        return page;
     }
 
     @Override
@@ -60,10 +64,13 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDtoWithoutCategoryIds> findAllByCategoryId(Long id, Pageable pageable) {
-        return bookRepository.findAllByCategoriesId(id, pageable).stream()
+    public Page<BookDtoWithoutCategoryIds> findAllByCategoryId(Long id, Pageable pageable) {
+        List<BookDtoWithoutCategoryIds> list = bookRepository
+                .findAllByCategoriesId(id, pageable).stream()
                 .map(bookMapper::toDtoWithoutCategoryIds)
                 .toList();
+        Page page = new PageImpl(list);
+        return page;
     }
 
     private void checkIfBookExists(Long id) {

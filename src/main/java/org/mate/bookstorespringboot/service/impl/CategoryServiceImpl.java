@@ -9,6 +9,8 @@ import org.mate.bookstorespringboot.exceptions.EntityNotFoundException;
 import org.mate.bookstorespringboot.model.Category;
 import org.mate.bookstorespringboot.repository.CategoryRepository;
 import org.mate.bookstorespringboot.service.interfaces.CategoryService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -22,10 +24,12 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryMapper mapper;
 
     @Override
-    public List<CategoryDto> findAll(Pageable pageable) {
-        return categoryRepository.findAll(pageable).stream()
+    public Page<CategoryDto> findAll(Pageable pageable) {
+        List<CategoryDto> list = categoryRepository.findAll(pageable).stream()
                 .map(mapper::toDto)
                 .toList();
+        Page<CategoryDto> pageDto = new PageImpl<>(list);
+        return pageDto;
     }
 
     @Override

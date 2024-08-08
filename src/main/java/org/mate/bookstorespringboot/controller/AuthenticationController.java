@@ -10,10 +10,10 @@ import org.mate.bookstorespringboot.exceptions.RegistrationException;
 import org.mate.bookstorespringboot.security.AuthenticationService;
 import org.mate.bookstorespringboot.service.interfaces.UserService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,11 +25,11 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
     @PostMapping("/registration")
-    public ResponseEntity<UserRegistrationResponseDto> register(
+    @ResponseStatus(HttpStatus.CREATED)
+    public UserRegistrationResponseDto register(
             @RequestBody @Valid UserRegistrationRequestDto userRegistrationRequestDto)
             throws RegistrationException {
-        UserRegistrationResponseDto user = userService.createUser(userRegistrationRequestDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+        return userService.createUser(userRegistrationRequestDto);
     }
 
     @PostMapping("/login")
