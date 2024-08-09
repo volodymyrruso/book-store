@@ -79,3 +79,15 @@ databaseChangeLog:
       changes:
         - sqlFile:
             path: db/changelog/changeset_update_table/add_name_field_and_isDeleted_to_category_table.sql
+  - changeSet:
+      id: 14
+      author: Volodymyr
+      changes:
+        - sqlFile:
+            path: db/changelog/changeset_create_table/create_shopping_cart_table.sql
+  - changeSet:
+      id: 15
+      author: Volodymyr
+      changes:
+        - sqlFile:
+            path: db/changelog/changeset_create_table/create_cart_item_table.sql
