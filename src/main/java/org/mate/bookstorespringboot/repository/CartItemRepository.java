@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface CartItemRepository extends JpaRepository<CartItem, Long> {
 
     @Query("SELECT ci FROM CartItem ci "
-            + "LEFT JOIN FETCH ci.book b "
+            + "JOIN FETCH ci.book b "
             + "WHERE ci.shoppingCart.id = :shoppingCartId "
             + "AND ci.book.id = :bookId")
     Optional<CartItem> findByShoppingCartIdAndBookId(Long shoppingCartId,

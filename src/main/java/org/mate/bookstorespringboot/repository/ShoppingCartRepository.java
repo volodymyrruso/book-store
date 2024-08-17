@@ -8,11 +8,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Long> {
-    @Query("""
-            SELECT sc FROM ShoppingCart sc
-             LEFT JOIN FETCH sc.cartItem ci
-            LEFT JOIN FETCH sc.cartItem.book
-            WHERE sc.user.id = :userId"""
-    )
+
+    @Query("SELECT DISTINCT sc FROM ShoppingCart sc "
+            + "LEFT JOIN FETCH sc.cartItem ci "
+            + "JOIN FETCH ci.book b "
+            + "WHERE sc.user.id = :userId")
     Optional<ShoppingCart> findByUserId(Long userId);
 }

@@ -6,6 +6,7 @@ import org.mate.bookstorespringboot.controller.dto.cartitem.UpdateCartItemReques
 import org.mate.bookstorespringboot.controller.dto.shoppingcart.ShoppingCartDto;
 import org.mate.bookstorespringboot.model.User;
 import org.mate.bookstorespringboot.service.interfaces.ShoppingCartService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,13 +27,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class ShoppingCartController {
     private final ShoppingCartService shoppingCartService;
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<ShoppingCartDto> getUserShoppingCart(Authentication authentication) {
         return ResponseEntity
                 .ok(shoppingCartService.getShoppingCart(getUserIdByAuthentication(authentication)));
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<ShoppingCartDto> addBookToShoppingCart(Authentication authentication,
                                                                  @RequestBody @Validated
                                                                  CartItemRequestDto requestDto) {
@@ -50,6 +52,7 @@ public class ShoppingCartController {
     }
 
     @DeleteMapping("/{cartItemId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteShoppingCart(Authentication authentication,
                                    @PathVariable Long cartItemId) {
         shoppingCartService

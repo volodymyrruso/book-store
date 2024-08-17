@@ -29,6 +29,9 @@ public interface BookMapper {
 
     BookDtoWithoutCategoryIds toDtoWithoutCategoryIds(Book book);
 
+    @Mapping(target = "categories", ignore = true)
+    Book dtoToEntity(BookDto bookDto);
+
     @AfterMapping
     default void setCategoryIds(@MappingTarget BookDto bookDto, Book book) {
         Set<Long> categoryIds = book.getCategories().stream()
